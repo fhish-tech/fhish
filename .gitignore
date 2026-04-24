@@ -1,0 +1,32 @@
+node_modules/
+dist/
+build/
+coverage/
+.env
+.env.*
+!.env.example
+.DS_Store
+
+# Go
+fhish
+fhish-cli/fhish
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Hardhat
+cache/
+artifacts/
+
+# FHE Keys
+keys-shortint/
+*.bin
+*.pub
+
+# Temp
+tmp/
+.tmp/
