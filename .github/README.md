@@ -27,14 +27,4 @@ Fhish is built from the ground up using **tfhe-rs**. We have zero external servi
 - **Your Infrastructure**: Self-hosted gateways and relayers.
 - **Your Privacy**: End-to-end encryption from the user's wallet to the smart contract fulfillment.
 
-## 🚦 Getting Started
-
-The easiest way to see Fhish in action is through our automated verification suite:
-
-```bash
-git clone https://github.com/fhish-tech/fhish.git
-cd fhish/fhish-cli
-docker compose -f docker/docker-compose.yml --profile verify up --build
-```
-
 Join us in building the most private corner of the Initia Interwoven network! 🐟🔒
