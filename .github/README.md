@@ -1,5 +1,9 @@
 # Fhish: The Private FHE Layer for Initia 🐟✨
 
+## 👁️ Vision
+
+Fhish is a private FHE rollup stack that solves the lack of native on-chain privacy in modern L2s. By enabling encrypted state computation, it protects sensitive user data from public exposure.
+
 Fhish is a specialized **Fully Homomorphic Encryption (FHE) Rollup Stack** built to bring native on-chain privacy to the **Initia** ecosystem. By leveraging Initia's **Interwoven Rollup** architecture and the **MiniEVM**, Fhish enables developers to build decentralized applications where state remains encrypted even during computation.
 
 ## 🌟 Why Fhish on Initia?
