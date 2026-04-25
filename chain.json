@@ -9,7 +9,7 @@
         },
         "evm": {
             "enabled": true,
-            "jsonRpc": "http://161.35.63.119:8485"
+            "jsonRpc": "http://161.35.63.119:8545"
         }
     },
     "fees": {
