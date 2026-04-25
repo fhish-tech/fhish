@@ -1,6 +1,34 @@
-# Fhish Private FHE Rollup Stack
+## System Architecture
 
-Fhish is a comprehensive Fully Homomorphic Encryption (FHE) rollup stack designed to bring privacy-preserving smart contracts to the Initia ecosystem. It allows developers to deploy private applications on an EVM-compatible layer where transaction data remains encrypted off-chain, and computations are fulfilled securely via an FHE co-processor infrastructure.
+```mermaid
+graph TD
+    subgraph Client ["Client Side (Browser)"]
+        User["User App (Demo)"]
+        WASM["fhish-wasm"]
+        User -->|Encrypt Input| WASM
+        WASM -->|Encrypted Payload| User
+    end
+
+    subgraph OnChain ["Initia MiniEVM (Rollup Layer)"]
+        SC["Solidity Smart Contract"]
+        Pre["FHE Precompiles (Add, Sub, Mul)"]
+        User -->|Post Encrypted Tx| SC
+        SC <-->|Private Computation| Pre
+    end
+
+    subgraph OffChain ["FHE Infrastructure"]
+        Relayer["FHE Relayer (Rust)"]
+        Gateway["FHE Gateway (Node.js)"]
+        Relayer <-->|Fetch Ciphertexts| SC
+        Relayer <-->|Decrypt Request| Gateway
+        Gateway -->|Tally Result| SC
+    end
+
+    style User fill:#2563eb,stroke:#fff,color:#fff
+    style SC fill:#7c3aed,stroke:#fff,color:#fff
+    style Gateway fill:#059669,stroke:#fff,color:#fff
+    style Relayer fill:#d97706,stroke:#fff,color:#fff
+```
 
 ## Quickstart (The Wizard Way)
 
