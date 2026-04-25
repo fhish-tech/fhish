@@ -21,83 +21,90 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-12">
-      {/* Header Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
-        <StatCard 
-          icon={<Box className="text-blue-500" />} 
-          label="Latest Block" 
-          value={latestBlock.toString()} 
-          sub="Mining at ~1s"
-        />
-        <StatCard 
-          icon={<Activity className="text-emerald-500" />} 
-          label="Transactions" 
-          value={transactions.length.toString()} 
-          sub="Recent window"
-        />
-        <StatCard 
-          icon={<Shield className="text-purple-500" />} 
-          label="FHE Status" 
-          value="Online" 
-          sub="Gateway v2.0"
-        />
-        <StatCard 
-          icon={<Zap className="text-amber-500" />} 
-          label="Network" 
-          value="fhish-1" 
-          sub="MiniEVM Stack"
-        />
-      </div>
+    <div className="min-h-screen bg-[#050505] text-white p-6 font-sans">
+      <div className="max-w-7xl mx-auto">
+        {/* Header */}
+        <header className="flex items-center justify-between mb-12">
+          <div className="flex items-center gap-4">
+            <div className="w-12 h-12 relative">
+              <img src="/logo.png" alt="FHISH Logo" className="w-full h-full object-contain" />
+            </div>
+            <div>
+              <h1 className="text-4xl font-black tracking-tighter bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                FHISH EXPLORER
+              </h1>
+              <p className="text-white/40 text-xs tracking-[0.2em] font-bold uppercase">
+                Private FHE Rollup Mainnet
+              </p>
+            </div>
+          </div>
+          <div className="flex items-center gap-6">
+            <div className="text-right">
+              <div className="text-[10px] text-white/40 font-bold uppercase tracking-widest mb-1">Network Status</div>
+              <div className="flex items-center gap-2 text-green-400 font-mono text-sm">
+                <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                Operational
+              </div>
+            </div>
+          </div>
+        </header>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        {/* Recent Blocks */}
-        <section>
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-bold flex items-center gap-2">
-              <Database className="w-5 h-5 text-gray-400" />
-              Latest Blocks
-            </h2>
-          </div>
-          <div className="space-y-4">
-            {blocks.map((block) => (
-              <BlockItem key={block.hash} block={block} />
-            ))}
-          </div>
-        </section>
+        {/* Stats Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-12">
+          <StatCard title="Latest Block" value={`#${latestBlock}`} icon={<Box size={20} />} />
+          <StatCard title="Total Transactions" value={transactions.length.toString()} icon={<Zap size={20} />} />
+          <StatCard title="FHE Shielded" value={transactions.filter(t => t.isFHE).length.toString()} icon={<Shield size={20} />} />
+          <StatCard title="Network" value="Rollup-1" icon={<Activity size={20} />} />
+        </div>
 
-        {/* Recent Transactions */}
-        <section>
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-xl font-bold flex items-center gap-2">
-              <Zap className="w-5 h-5 text-gray-400" />
-              Recent Transactions
-            </h2>
-          </div>
-          <div className="space-y-4">
-            {transactions.map((tx) => (
-              <TransactionItem key={tx.hash} tx={tx} />
-            ))}
-          </div>
-        </section>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Blocks Column */}
+          <section>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-xl font-bold flex items-center gap-2">
+                <Box className="text-blue-400" /> Latest Blocks
+              </h2>
+            </div>
+            <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
+              {blocks.map((block) => (
+                <BlockItem key={block.hash} block={block} />
+              ))}
+            </div>
+          </section>
+
+          {/* Transactions Column */}
+          <section>
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-xl font-bold flex items-center gap-2">
+                <Zap className="text-yellow-400" /> All Transactions
+              </h2>
+            </div>
+            <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
+              {transactions.map((tx) => (
+                <TransactionItem key={tx.hash} tx={tx} />
+              ))}
+            </div>
+          </section>
+        </div>
       </div>
     </div>
   )
 }
 
-function StatCard({ icon, label, value, sub }: { icon: React.ReactNode, label: string, value: string, subText?: string, sub: string }) {
+function StatCard({ icon, value, title }: { icon: React.ReactNode, value: string, title: string }) {
   return (
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="glass p-6 rounded-2xl"
+      className="glass p-6 rounded-2xl border border-white/5 bg-white/[0.02]"
     >
       <div className="flex items-center gap-3 mb-4">
-        {icon}
-        <span className="text-gray-400 text-sm font-medium">{label}</span>
+        <div className="p-2 rounded-lg bg-white/5 text-blue-400">
+          {icon}
+        </div>
+        <span className="text-white/40 text-[10px] font-bold uppercase tracking-widest">{title}</span>
       </div>
-      <div className="text-3xl font-bold mb-1">{value}</div>
-      <div className="text-xs text-gray-500">{sub}</div>
+      <div className="text-3xl font-black tracking-tighter">{value}</div>
     </motion.div>
   )
 }
