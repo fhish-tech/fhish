@@ -1,0 +1,43 @@
+---
+title: Fhish Merchant App
+description: A dashboard for merchants to accept crypto payments and manage their business.
+---
+
+## Overview
+
+The Fhish Merchant App provides an interface for businesses to integrate Fhish and monitor their financial operations.
+
+### Key Features
+
+- **Merchant Dashboard**: Real-time sales data, transaction history, and pending payouts.
+- **Payment Link Generation**: Create shareable payment links for specific products or orders.
+- **Settlement Management**: Automated settlement of crypto payments into preferred stablecoins.
+- **Product Management**: Tools for adding, editing, and categorizing products for the shopper experience.
+
+### Merchant Settlement Logic
+
+Fhish uses a sophisticated settlement layer to bridge crypto payments and business account needs:
+1.  **Payment Collection**: The `MerchantRouter.sol` handles incoming customer payments.
+2.  **AMM Integration**: If the payment asset (e.g., WETH) differs from the merchant's target settlement asset (e.g., USDC), Fhish automatically swaps it via the internal AMM pools.
+3.  **Credit Offsetting**: If the merchant has an active credit line for business expenses, a portion of every sale can be automatically routed to repay the debt, interest-free.
+
+### Merchant Technical Detail
+
+| Feature | Description |
+| :--- | :--- |
+| **Merchant Score** | Calculated based on transaction volume, history, and dispute resolution via `ScoreManager.sol`. |
+| **Credit Limit** | Merchants can borrow up to their "Earned Limit," which grows as their business scales within the protocol. |
+| **Withdrawal Delay** | To prevent fraud, some withdrawals may have a security delay of up to 12 hours depending on the risk score. |
+
+### Deployment (Sepolia)
+
+- **MerchantRouter**: `0xCa924A3bC86b2EaBDc01a3617CA89c3CD383B19B` [Explorer](https://sepolia.etherscan.io/address/0xCa924A3bC86b2EaBDc01a3617CA89c3CD383B19B)
+
+---
+
+### Getting Started as a Merchant
+
+1.  **Register**: Create a merchant account via the app.
+2.  **API Key**: Generate an API key for protocol integration.
+3.  **Integration**: Add the Fhish button or use the redirect URL.
+4.  **Accept Payments**: Start receiving crypto directly into your wallet or preferred settlement asset.

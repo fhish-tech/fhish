@@ -1,9 +1,5 @@
 # Fhish: The Private FHE Layer for Initia 🐟✨
 
-## 👁️ Vision
-
-Fhish is a private FHE rollup stack that solves the lack of native on-chain privacy in modern L2s. By enabling encrypted state computation, it protects sensitive user data from public exposure.
-
 Fhish is a specialized **Fully Homomorphic Encryption (FHE) Rollup Stack** built to bring native on-chain privacy to the **Initia** ecosystem. By leveraging Initia's **Interwoven Rollup** architecture and the **MiniEVM**, Fhish enables developers to build decentralized applications where state remains encrypted even during computation.
 
 ## 🌟 Why Fhish on Initia?
@@ -20,9 +16,9 @@ Fhish is a complete, end-to-end ecosystem:
 
 - **[fhish-cli](https://github.com/fhish-tech/fhish-cli)**: The developer's Swiss Army Knife. Scaffold, deploy, and manage FHE rollups with a single command. Forked and enhanced from Initia's `weave-cli`.
 - **[fhish-gateway](https://github.com/fhish-tech/fhish-gateway)**: A high-performance ciphertext data-availability layer. It stores the heavy FHE blobs (16KB+) off-chain, returning lightweight 32-byte handles to the MiniEVM.
-- **[fhish-relayer-v2](https://github.com/fhish-tech/packages/fhish-relayer-v2)**: The "engine room" of privacy. It monitors the chain, retrieves ciphertexts from the Gateway, performs secure decryption via WASM, and fulfills results back to the rollup.
-- **[fhish-wasm](https://github.com/fhish-tech/packages/fhish-wasm)**: Pure Rust `tfhe-rs` bindings compiled to WebAssembly. This provides the cryptographic backbone for both the browser (client-side encryption) and the Node.js environment (relayer decryption).
-- **[fhish-contracts-v2](https://github.com/fhish-tech/packages/fhish-contracts-v2)**: Developer-friendly Solidity interfaces. Add FHE to your Initia app by simply inheriting from `FhishGatewayCaller`.
+- **[fhish-relayer-v2](https://github.com/fhish-tech/fhish-relayer-v2)**: The "engine room" of privacy. It monitors the chain, retrieves ciphertexts from the Gateway, performs secure decryption via WASM, and fulfills results back to the rollup.
+- **[fhish-wasm](https://github.com/fhish-tech/fhish-wasm)**: Pure Rust `tfhe-rs` bindings compiled to WebAssembly. This provides the cryptographic backbone for both the browser (client-side encryption) and the Node.js environment (relayer decryption).
+- **[fhish-contracts-v2](https://github.com/fhish-tech/fhish-contracts-v2)**: Developer-friendly Solidity interfaces. Add FHE to your Initia app by simply inheriting from `FhishGatewayCaller`.
 
 ## 🛡️ Core Philosophy: Total Independence
 

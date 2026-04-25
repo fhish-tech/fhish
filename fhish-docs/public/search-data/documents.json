@@ -1,0 +1,279 @@
+[
+  {
+    "slug": "/apps/checkout-app",
+    "title": "Polaris Checkout App",
+    "description": "A drop-in checkout component for decentralized payments.",
+    "content": "## Overview\n\nThe Polaris Checkout App is a lightweight, embeddable interface for handling specific payment transactions.\n\n### Key Features\n\n* **Embeddable Modal**: Easily add Polaris Pay to any website with just a few lines of code.\n* **Merchant-Aware UI**: Automatically adjusts the interface based on the active merchant.\n* **Transaction Proofs**: Confirms payment with on-chain proofs and off-chain database updates.\n* **Support for FHE Payments**: Encrypted transaction data for confidential payments.\n\n### Technical Details\n\n* **Protocol Integration**: Calls `MerchantRouter.sol` and `PrivateSwapBNB/USDC/USDT/WETH.sol`.\n* **Database Tracking**: Updates the `transactions` collection in MongoDB.\n* **API Support**: Uses `/api/pay` and `/api/proof` for transaction management.\n\n### Example Integration\n\nMerchants can use the checkout app by redirecting users to the checkout URL with the appropriate query parameters:\n`https://checkout.polaris.network?merchantId={ID}&amount={AMOUNT}&currency={CURRENCY}`\n",
+    "_searchMeta": {
+      "cleanContent": "overview the polaris checkout app is a lightweight embeddable interface for handling specific payment transactions key features embeddable modal: easily add polaris pay to any website with just a few lines of code merchant-aware ui: automatically adjusts the interface based on the active merchant transaction proofs: confirms payment with on-chain proofs and off-chain database updates support for fhe payments: encrypted transaction data for confidential payments technical details protocol integration: calls merchantrouter sol and privateswapbnb usdc usdt weth sol database tracking: updates the transactions collection in mongodb api support: uses api pay and api proof for transaction management example integration merchants can use the checkout app by redirecting users to the checkout url with the appropriate query parameters: https: checkout polaris network merchantid id amount amount currency currency",
+      "headings": [
+        "Overview"
+      ],
+      "keywords": [
+        "Overview",
+        "Embeddable Modal",
+        "Merchant-Aware UI",
+        "Transaction Proofs",
+        "Support for FHE Payments",
+        "Protocol Integration",
+        "Database Tracking",
+        "API Support",
+        "MerchantRouter.sol",
+        "PrivateSwapBNB/USDC/USDT/WETH.sol",
+        "transactions",
+        "/api/pay",
+        "/api/proof",
+        "https://checkout.polaris.network?merchantId={ID}&amount={AMOUNT}&currency={CURRENCY}"
+      ]
+    }
+  },
+  {
+    "slug": "/apps/merchant-app",
+    "title": "Polaris Merchant App",
+    "description": "A dashboard for merchants to accept crypto payments and manage their business.",
+    "content": "## Overview\n\nThe Polaris Merchant App provides an interface for businesses to integrate Polaris Pay and monitor their financial operations.\n\n### Key Features\n\n* **Merchant Dashboard**: Real-time sales data, transaction history, and pending payouts.\n* **Payment Link Generation**: Create shareable payment links for specific products or orders.\n* **Settlement Management**: Automated settlement of crypto payments into preferred stablecoins.\n* **Product Management**: Tools for adding, editing, and categorizing products for the shopper experience.\n\n### Technical Integration\n\n* **Frontend**: Next.js 15 (React 19)\n* **Styling**: Tailwind CSS\n* **Smart Contracts**: `MerchantRouter.sol`\n* **Database**: MongoDB (merchants collection)\n\n### Getting Started as a Merchant\n\n1. **Register**: Create a merchant account via the app.\n2. **API Key**: Generate an API key for protocol integration.\n3. **Integration**: Add the Polaris Pay button or use the redirect URL.\n4. **Accept Payments**: Start receiving crypto directly into your wallet or preferred settlement asset.\n",
+    "_searchMeta": {
+      "cleanContent": "overview the polaris merchant app provides an interface for businesses to integrate polaris pay and monitor their financial operations key features merchant dashboard: real-time sales data transaction history and pending payouts payment link generation: create shareable payment links for specific products or orders settlement management: automated settlement of crypto payments into preferred stablecoins product management: tools for adding editing and categorizing products for the shopper experience technical integration frontend: next js 15 react 19 styling: tailwind css smart contracts: merchantrouter sol database: mongodb merchants collection getting started as a merchant register: create a merchant account via the app api key: generate an api key for protocol integration integration: add the polaris pay button or use the redirect url accept payments: start receiving crypto directly into your wallet or preferred settlement asset",
+      "headings": [
+        "Overview"
+      ],
+      "keywords": [
+        "Overview",
+        "Merchant Dashboard",
+        "Payment Link Generation",
+        "Settlement Management",
+        "Product Management",
+        "Frontend",
+        "Styling",
+        "Smart Contracts",
+        "Database",
+        "Register",
+        "API Key",
+        "Integration",
+        "Accept Payments",
+        "MerchantRouter.sol"
+      ]
+    }
+  },
+  {
+    "slug": "/apps/shopping-app",
+    "title": "Polaris Shopping App",
+    "description": "A consumer-facing interface for discovering and buying products with Polaris Pay.",
+    "content": "## Overview\n\nThe Polaris Shopping App provides a seamless e-commerce experience for shoppers using-blockchain technology.\n\n### Key Features\n\n* **Product Discovery**: Browse cross-merchant products and categories.\n* **Unified Checkout**: A single checkout flow for multiple items across the network.\n* **Loyalty & Rewards**: Integrated reward points for active shoppers.\n* **Support for All Polaris Assets**: Pay with stablecoins, WETH, or BNB.\n\n### User Experience\n\n* **Non-Custodial**: Shoppers keep control of their assets throughout the discovery and purchase process.\n* **Efficient**: Sub-second product filtering and fast checkout with minimal blockchain friction.\n* **Multichain**: Support for assets across several networks (where supported).\n\n### Technical Integration\n\n* **Frontend**: Next.js (App Router)\n* **State Management**: React Query\n* **Data Source**: MongoDB (products, categories, transactions)\n",
+    "_searchMeta": {
+      "cleanContent": "overview the polaris shopping app provides a seamless e-commerce experience for shoppers using-blockchain technology key features product discovery: browse cross-merchant products and categories unified checkout: a single checkout flow for multiple items across the network loyalty rewards: integrated reward points for active shoppers support for all polaris assets: pay with stablecoins weth or bnb user experience non-custodial: shoppers keep control of their assets throughout the discovery and purchase process efficient: sub-second product filtering and fast checkout with minimal blockchain friction multichain: support for assets across several networks where supported technical integration frontend: next js app router state management: react query data source: mongodb products categories transactions",
+      "headings": [
+        "Overview"
+      ],
+      "keywords": [
+        "Overview",
+        "Product Discovery",
+        "Unified Checkout",
+        "Loyalty & Rewards",
+        "Support for All Polaris Assets",
+        "Non-Custodial",
+        "Efficient",
+        "Multichain",
+        "Frontend",
+        "State Management",
+        "Data Source"
+      ]
+    }
+  },
+  {
+    "slug": "/architecture",
+    "title": "Protocol Architecture",
+    "description": "Comprehensive overview of the Polaris Pay system.",
+    "content": "## Full Stack Overview\n\nPolaris Pay is built with a modular architecture that integrates blockchain privacy, efficient data management, and user-friendly frontends.\n\n```mermaid\ngraph TD\n    User([User]) <--> Frontend[Next.js 15 Frontend]\n    Frontend <--> APILayer[Next.js API Routes]\n    APILayer <--> MongoDB[(MongoDB Atlas)]\n    APILayer <--> Blockchain[Blockchain Layer]\n    Blockchain <--> FHEVM[FHEVM Privacy Layer]\n    Blockchain <--> SmartContracts[Lending & AMM Contracts]\n```\n\n### Components\n\n1. **Frontend Layer**: Next.js 15 (React 19) applications for shoppers, merchants, and the core protocol.\n2. **API Layer**: Serverless functions handling data orchestration and proof verification.\n3. **Database Layer**: MongoDB Atlas for tracking user positions, protocol stats, and merchant configurations.\n4. **Blockchain Layer**: Ethereum-compatible network (Sepolia/Local) hosting the core protocol.\n5. **Privacy Layer**: Zama's FHEVM for encrypted lending and borrowing operations.\n\n### Data Flow\n\n#### AMM Swap Flow\n\n1. **Frontend**: User enters amount, calls `getAmountOut()`.\n2. **Blockchain**: User approves tokens and executes `swap()`.\n3. **UI**: Updates with new balances after transaction confirmation.\n\n#### Lending Pool Flow\n\n1. **Frontend**: User deposits collateral.\n2. **Smart Contract**: Transfers assets and mints LP tokens.\n3. **API Route**: Updates MongoDB with the new user position.\n",
+    "_searchMeta": {
+      "cleanContent": "full stack overview polaris pay is built with a modular architecture that integrates blockchain privacy efficient data management and user-friendly frontends components frontend layer: next js 15 react 19 applications for shoppers merchants and the core protocol api layer: serverless functions handling data orchestration and proof verification database layer: mongodb atlas for tracking user positions protocol stats and merchant configurations blockchain layer: ethereum-compatible network sepolia local hosting the core protocol privacy layer: zama s fhevm for encrypted lending and borrowing operations data flow amm swap flow frontend: user enters amount calls getamountout blockchain: user approves tokens and executes swap ui: updates with new balances after transaction confirmation lending pool flow frontend: user deposits collateral smart contract: transfers assets and mints lp tokens api route: updates mongodb with the new user position",
+      "headings": [
+        "Full Stack Overview"
+      ],
+      "keywords": [
+        "Full Stack Overview",
+        "Frontend Layer",
+        "API Layer",
+        "Database Layer",
+        "Blockchain Layer",
+        "Privacy Layer",
+        "Frontend",
+        "Blockchain",
+        "UI",
+        "Smart Contract",
+        "API Route",
+        "mermaid\ngraph TD\n    User([User]) <--> Frontend[Next.js 15 Frontend]\n    Frontend <--> APILayer[Next.js API Routes]\n    APILayer <--> MongoDB[(MongoDB Atlas)]\n    APILayer <--> Blockchain[Blockchain Layer]\n    Blockchain <--> FHEVM[FHEVM Privacy Layer]\n    Blockchain <--> SmartContracts[Lending & AMM Contracts]",
+        "### Components\n\n1. **Frontend Layer**: Next.js 15 (React 19) applications for shoppers, merchants, and the core protocol.\n2. **API Layer**: Serverless functions handling data orchestration and proof verification.\n3. **Database Layer**: MongoDB Atlas for tracking user positions, protocol stats, and merchant configurations.\n4. **Blockchain Layer**: Ethereum-compatible network (Sepolia/Local) hosting the core protocol.\n5. **Privacy Layer**: Zama's FHEVM for encrypted lending and borrowing operations.\n\n### Data Flow\n\n#### AMM Swap Flow\n\n1. **Frontend**: User enters amount, calls",
+        ".\n2. **Blockchain**: User approves tokens and executes"
+      ]
+    }
+  },
+  {
+    "slug": "/core/overview",
+    "title": "Polaris Core Overview",
+    "description": "The backend orchestration and data management layer of Polaris Pay.",
+    "content": "## Overview\n\nPolaris Core is the primary Next.js backend for the Obolus Network, renamed Polaris Pay. It handles the core business logic, API orchestration, and database integration.\n\n### Core Features\n\n* **Protocol API**: A robust collection of RESTful APIs for interacting with the protocol and retrieving data.\n* **Convex Integration**: Real-time state synchronization for active lending positions.\n* **Supabase Integration**: Permanent data storage for user accounts, profiles, and historical data.\n* **MongoDB Integration**: Efficient document-based storage for merchants, products, and protocol stats.\n\n### Main API Routes\n\n* `/api/pools`: Retrieve a list of all active lending and AMM pools.\n* `/api/positions`: Get or update user supply and borrow positions.\n* `/api/global-stats`: Retrieve network-wide television, active pools, and average APYs.\n* `/api/limits`: Get user credit limits based on their protocol activity.\n* `/api/pay`: Process and track payments across merchants.\n\n### Database Schema\n\nPolaris Core uses a distributed database architecture:\n\n* **MongoDB**: `pools`, `positions`, `globalStats`, `limits`, `deposits`, `transactions`, `merchants`.\n* **Supabase**: `deposits_v1`, `schema_payease`.\n\n### Key Service Libraries\n\n* `lib/mongodb.ts`: Database connection management and singleton pattern.\n* `lib/fhevm-client.ts`: Routine for FHE encryption and decryption.\n* `hooks/`: A collection of React hooks for seamless protocol interaction (`useAccount`, `useReadContract`, `useFhePrivateLendingReal`).\n",
+    "_searchMeta": {
+      "cleanContent": "overview polaris core is the primary next js backend for the obolus network renamed polaris pay it handles the core business logic api orchestration and database integration core features protocol api: a robust collection of restful apis for interacting with the protocol and retrieving data convex integration: real-time state synchronization for active lending positions supabase integration: permanent data storage for user accounts profiles and historical data mongodb integration: efficient document-based storage for merchants products and protocol stats main api routes api pools: retrieve a list of all active lending and amm pools api positions: get or update user supply and borrow positions api global-stats: retrieve network-wide television active pools and average apys api limits: get user credit limits based on their protocol activity api pay: process and track payments across merchants database schema polaris core uses a distributed database architecture: mongodb: pools positions globalstats limits deposits transactions merchants supabase: depositsv1 schemapayease key service libraries lib mongodb ts: database connection management and singleton pattern lib fhevm-client ts: routine for fhe encryption and decryption hooks : a collection of react hooks for seamless protocol interaction useaccount usereadcontract usefheprivatelendingreal",
+      "headings": [
+        "Overview"
+      ],
+      "keywords": [
+        "Overview",
+        "Protocol API",
+        "Convex Integration",
+        "Supabase Integration",
+        "MongoDB Integration",
+        "MongoDB",
+        "Supabase",
+        "/api/pools",
+        "/api/positions",
+        "/api/global-stats",
+        "/api/limits",
+        "/api/pay",
+        "pools",
+        "positions",
+        "globalStats",
+        "limits",
+        "deposits",
+        "transactions",
+        "merchants",
+        "deposits_v1",
+        "schema_payease",
+        "lib/mongodb.ts",
+        "lib/fhevm-client.ts",
+        "hooks/",
+        "useAccount",
+        "useReadContract",
+        "useFhePrivateLendingReal"
+      ]
+    }
+  },
+  {
+    "slug": "/getting-started",
+    "title": "Getting Started",
+    "description": "How to start using Polaris Pay.",
+    "content": "Welcome to Polaris! This guide will help you get set up with our yield vaults and credit terminal on the Ethereum ecosystem.\n\n## Prerequisites\n\n* An Ethereum-compatible wallet (e.g., MetaMask).\n* Supported assets (USDC, ETH, etc.) for deposits on Sepolia/Mainnet.\n* Gas for transaction fees on the target chain.\n\n## Quick Start\n\n1. **Connect Wallet:** Navigate to [app.polaris.network](https://app.polaris.network) and connect your wallet.\n2. **Deposit Assets:** Select a vault and deposit your liquidity to start earning yield.\n3. **Unlock Credit:** Use your vTokens as collateral to borrow USDCx instantly via the Credit Terminal.\n\n***\n\nFor technical integration, see our [Developer Guide](/docs/developers).\n",
+    "_searchMeta": {
+      "cleanContent": "welcome to polaris this guide will help you get set up with our yield vaults and credit terminal on the ethereum ecosystem prerequisites an ethereum-compatible wallet e g metamask supported assets usdc eth etc for deposits on sepolia mainnet gas for transaction fees on the target chain quick start connect wallet: navigate to app polaris network and connect your wallet deposit assets: select a vault and deposit your liquidity to start earning yield unlock credit: use your vtokens as collateral to borrow usdcx instantly via the credit terminal for technical integration see our developer guide",
+      "headings": [
+        "Prerequisites",
+        "Quick Start"
+      ],
+      "keywords": [
+        "Prerequisites",
+        "Quick Start",
+        "Connect Wallet:",
+        "Deposit Assets:",
+        "Unlock Credit:"
+      ]
+    }
+  },
+  {
+    "slug": "/getting-started/installation",
+    "title": "Installation",
+    "description": "Setting up the Polaris SDK.",
+    "content": "## SDK Installation\n\nInstall the Polaris Pay SDK via npm:\n\n```bash\nnpm install @polaris-pay/sdk\n```\n\n## Setup\n\n```javascript\nimport { PolarisClient } from \"@polaris-pay/sdk\";\r\n\r\nconst client = new PolarisClient({\r\n  network: \"mainnet\",\r\n  apiKey: \"YOUR_API_KEY\"\r\n});\n```\n",
+    "_searchMeta": {
+      "cleanContent": "sdk installation install the polaris pay sdk via npm: setup",
+      "headings": [
+        "SDK Installation",
+        "Setup"
+      ],
+      "keywords": [
+        "SDK Installation",
+        "Setup",
+        "bash\nnpm install @polaris-pay/sdk",
+        "## Setup",
+        "javascript\nimport { PolarisClient } from \"@polaris-pay/sdk\";\r\n\r\nconst client = new PolarisClient({\r\n  network: \"mainnet\",\r\n  apiKey: \"YOUR_API_KEY\"\r\n});"
+      ]
+    }
+  },
+  {
+    "slug": "/",
+    "title": "Welcome to Polaris Pay",
+    "description": "Yield vaults and credit rails on Ethereum.",
+    "content": "## What is Polaris Pay?\n\nPolaris Pay is an institutional-grade fintech layer built on the Ethereum blockchain. We bridge the gap between yield optimization and credit accessibility, providing a seamless, non-custodial experience for multichain asset holders.\n\nAt its heart, Polaris is a **yield-serviced credit protocol**. This means that when you deposit assets into our vaults, the productivity of that capital can be used to automatically repay credit lines, creating a \"buy now, pay later\" experience powered by your own wealth.\n\n### The Three Layers of Polaris\n\n1. **Layer 1: Yield Vaults** - Auto-compounding strategy vaults for stablecoins and blue-chip assets.\n2. **Layer 2: vToken Collateral** - Use your vault receipt tokens (vTokens) as collateral for instant credit lines.\n3. **Layer 3: BNPL Credit Rails** - A unique yield-serviced repayment model where the productivity of your assets pays off your debt automatically.\n\n## The Polaris Value Proposition\n\n### 1. Capital Efficiency\n\nMost DeFi protocols require you to choose between earning yield or using your assets as collateral. Polaris allows you to do both simultaneously. Your collateral continues to earn yield while it secures your credit line.\n\n### 2. Privacy by Design (FHEVM)\n\nUsing Zama's Fully Homomorphic Encryption, Polaris offers encrypted lending positions. Your total debt, collateral ratios, and credit scores can be kept private from public observation while still being verifiable on-chain for protocol safety.\n\n### 3. Yield-Serviced Repayment\n\nImagine a credit card where you never have to \"pay\" the bill manually. By routing your vault yield towards your debt interest and principal, Polaris creates a self-repaying debt model.\n\n***\n\n### Getting Started\n\n* **For Shoppers:** Discover products and pay with Polaris in the [Shopping App](/docs/apps/shopping-app).\n* **For Merchants:** Set up your store and accept yield-backed payments via the [Merchant App](/docs/apps/merchant-app).\n* **For Developers:** Integrate the Polaris protocol or checkout component via the [Developer Guide](/docs/developers).\n\nExplore our documentation to learn more about how Polaris works and how to integrate it into your platform.\n",
+    "_searchMeta": {
+      "cleanContent": "what is polaris pay polaris pay is an institutional-grade fintech layer built on the ethereum blockchain we bridge the gap between yield optimization and credit accessibility providing a seamless non-custodial experience for multichain asset holders at its heart polaris is a yield-serviced credit protocol this means that when you deposit assets into our vaults the productivity of that capital can be used to automatically repay credit lines creating a buy now pay later experience powered by your own wealth the three layers of polaris layer 1: yield vaults - auto-compounding strategy vaults for stablecoins and blue-chip assets layer 2: vtoken collateral - use your vault receipt tokens vtokens as collateral for instant credit lines layer 3: bnpl credit rails - a unique yield-serviced repayment model where the productivity of your assets pays off your debt automatically the polaris value proposition capital efficiency most defi protocols require you to choose between earning yield or using your assets as collateral polaris allows you to do both simultaneously your collateral continues to earn yield while it secures your credit line privacy by design fhevm using zama s fully homomorphic encryption polaris offers encrypted lending positions your total debt collateral ratios and credit scores can be kept private from public observation while still being verifiable on-chain for protocol safety yield-serviced repayment imagine a credit card where you never have to pay the bill manually by routing your vault yield towards your debt interest and principal polaris creates a self-repaying debt model getting started for shoppers: discover products and pay with polaris in the shopping app for merchants: set up your store and accept yield-backed payments via the merchant app for developers: integrate the polaris protocol or checkout component via the developer guide explore our documentation to learn more about how polaris works and how to integrate it into your platform",
+      "headings": [
+        "What is Polaris Pay?",
+        "The Polaris Value Proposition"
+      ],
+      "keywords": [
+        "What is Polaris Pay?",
+        "The Polaris Value Proposition",
+        "yield-serviced credit protocol",
+        "Layer 1: Yield Vaults",
+        "Layer 2: vToken Collateral",
+        "Layer 3: BNPL Credit Rails",
+        "For Shoppers:",
+        "For Merchants:",
+        "For Developers:"
+      ]
+    }
+  },
+  {
+    "slug": "/protocol/fhevm",
+    "title": "FHEVM Privacy Integration",
+    "description": "Real Fully Homomorphic Encryption (FHE) for confidential DeFi.",
+    "content": "## What is FHEVM?\n\nPolaris Pay implements a complete, production-ready Zama FHEVM integration. This provides truly confidential lending and borrowing by performing computations on encrypted data.\n\n### Features\n\n* **Actual Encryption**: Amounts and balances are encrypted using FHE (`euint64`).\n* **Privacy Guarantees**: On-chain data is fully confidential; only authorized users (via EIP-712) can decrypt.\n* **Secure Computation**: All operations like addition, subtraction, and comparison happen on encrypted data.\n* **Zama Infrastructure**: Uses real KMS (Key Management System) and Relayer for encryption and decryption.\n\n### Encryption Flow\n\n1. **Frontend**: User creates an encrypted input using the FHEVM SDK.\n2. **ZK-Proof**: A zero-knowledge proof is generated to verify the encryption.\n3. **On-Chain**: The contract receives the encrypted handle and proof.\n4. **Validation**: `FHE.fromExternal()` validates the proof and converts to an encrypted type.\n5. **Computation**: Logic (e.g., balance updates) works on encrypted handles.\n\n### Decryption Flow\n\n#### Private Decryption\n\nA user can view their balance by generating a keypair and an EIP-712 signature in the frontend. The Zama Relayer decrypts the value and returns it securely to the user.\n\n#### Public Decryption\n\nFor operations requiring transparency (e.g., public liquidation), the contract calls `FHE.makePubliclyDecryptable()`. Anyone can then request decryption with proof verification.\n\n## Implementation Details\n\nThe implementation includes hooks and a dedicated FHEVM client library for easy integration:\n\n* `lib/fhevm-client.ts`: Low-level encryption/decryption routines.\n* `hooks/use-fhe-private-lending-real.ts`: High-level React hooks for lending operations.\n",
+    "_searchMeta": {
+      "cleanContent": "what is fhevm polaris pay implements a complete production-ready zama fhevm integration this provides truly confidential lending and borrowing by performing computations on encrypted data features actual encryption: amounts and balances are encrypted using fhe euint64 privacy guarantees: on-chain data is fully confidential only authorized users via eip-712 can decrypt secure computation: all operations like addition subtraction and comparison happen on encrypted data zama infrastructure: uses real kms key management system and relayer for encryption and decryption encryption flow frontend: user creates an encrypted input using the fhevm sdk zk-proof: a zero-knowledge proof is generated to verify the encryption on-chain: the contract receives the encrypted handle and proof validation: fhe fromexternal validates the proof and converts to an encrypted type computation: logic e g balance updates works on encrypted handles decryption flow private decryption a user can view their balance by generating a keypair and an eip-712 signature in the frontend the zama relayer decrypts the value and returns it securely to the user public decryption for operations requiring transparency e g public liquidation the contract calls fhe makepubliclydecryptable anyone can then request decryption with proof verification implementation details the implementation includes hooks and a dedicated fhevm client library for easy integration: lib fhevm-client ts: low-level encryption decryption routines hooks use-fhe-private-lending-real ts: high-level react hooks for lending operations",
+      "headings": [
+        "What is FHEVM?",
+        "Implementation Details"
+      ],
+      "keywords": [
+        "What is FHEVM?",
+        "Implementation Details",
+        "Actual Encryption",
+        "Privacy Guarantees",
+        "Secure Computation",
+        "Zama Infrastructure",
+        "Frontend",
+        "ZK-Proof",
+        "On-Chain",
+        "Validation",
+        "Computation",
+        "euint64",
+        "FHE.fromExternal()",
+        "FHE.makePubliclyDecryptable()",
+        "lib/fhevm-client.ts",
+        "hooks/use-fhe-private-lending-real.ts"
+      ]
+    }
+  },
+  {
+    "slug": "/protocol",
+    "title": "Protocol Overview",
+    "description": "The core smart contracts and privacy-preserving primitives of Polaris Pay.",
+    "content": "## Smart Contracts\n\nThe Polaris Pay protocol consists of a set of modular smart contracts for lending, swapping, and privacy.\n\n### Core Contracts\n\n* **PoolManager.sol**: The central entry point for managing all asset pools.\n* **LoanEngine.sol**: Logic for originating and managing debt positions.\n* **ScoreManager.sol**: Calculates and stores user credit scores for lending.\n* **MerchantRouter.sol**: Facilitates payments between shoppers and merchants.\n* **CreditOracle.sol**: Feeds external price data and credit information to the protocol.\n\n### Lending Pools\n\nA set of decentralized lending pools for various assets:\n\n* `LendingPoolUSDC.sol`: Support for stablecoin USDC.\n* `LendingPoolUSDT.sol`: Support for stablecoin USDT.\n* `LendingPoolWETH.sol`: Support for Wrapped Ether.\n* `LendingPoolBNB.sol`: Support for Binance Coin.\n\n### AMM Pools\n\nProvides liquidity for swapping assets:\n\n* `AMMPoolWETH_USDC.sol`\n* `AMMPoolWETH_USDT.sol`\n* `AMMPoolBNB_USDC.sol`\n* `AMMPoolBNB_USDT.sol`\n\n### Privacy Primitives (FHEVM)\n\nEncrypted lending and borrowing based on Zama's Fully Homomorphic Encryption:\n\n* **PrivateCollateralVault.sol**: Encrypted collateral management.\n* **PrivateBorrowManager.sol**: Encrypted debt tracking.\n* **PrivateLendingPool.sol**: Private liquidity supply.\n* **PrivateLiquidationEngine.sol**: Privacy-preserving liquidations.\n",
+    "_searchMeta": {
+      "cleanContent": "smart contracts the polaris pay protocol consists of a set of modular smart contracts for lending swapping and privacy core contracts poolmanager sol: the central entry point for managing all asset pools loanengine sol: logic for originating and managing debt positions scoremanager sol: calculates and stores user credit scores for lending merchantrouter sol: facilitates payments between shoppers and merchants creditoracle sol: feeds external price data and credit information to the protocol lending pools a set of decentralized lending pools for various assets: lendingpoolusdc sol: support for stablecoin usdc lendingpoolusdt sol: support for stablecoin usdt lendingpoolweth sol: support for wrapped ether lendingpoolbnb sol: support for binance coin amm pools provides liquidity for swapping assets: ammpoolweth_usdc sol ammpoolweth_usdt sol ammpoolbnb_usdc sol ammpoolbnb_usdt sol privacy primitives fhevm encrypted lending and borrowing based on zama s fully homomorphic encryption: privatecollateralvault sol: encrypted collateral management privateborrowmanager sol: encrypted debt tracking privatelendingpool sol: private liquidity supply privateliquidationengine sol: privacy-preserving liquidations",
+      "headings": [
+        "Smart Contracts"
+      ],
+      "keywords": [
+        "Smart Contracts",
+        "PoolManager.sol",
+        "LoanEngine.sol",
+        "ScoreManager.sol",
+        "MerchantRouter.sol",
+        "CreditOracle.sol",
+        "PrivateCollateralVault.sol",
+        "PrivateBorrowManager.sol",
+        "PrivateLendingPool.sol",
+        "PrivateLiquidationEngine.sol",
+        "LendingPoolUSDC.sol",
+        "LendingPoolUSDT.sol",
+        "LendingPoolWETH.sol",
+        "LendingPoolBNB.sol",
+        "AMMPoolWETH_USDC.sol",
+        "AMMPoolWETH_USDT.sol",
+        "AMMPoolBNB_USDC.sol",
+        "AMMPoolBNB_USDT.sol"
+      ]
+    }
+  }
+]

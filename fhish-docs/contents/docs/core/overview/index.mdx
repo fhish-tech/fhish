@@ -1,0 +1,35 @@
+---
+title: Fhish Core Overview
+description: The backend orchestration and data management layer of Fhish.
+---
+
+## Overview
+
+Fhish Core is the primary Next.js backend for the Obolus Network, renamed Fhish. It handles the core business logic, API orchestration, and database integration.
+
+### Core Features
+
+- **Protocol API**: A robust collection of RESTful APIs for interacting with the protocol and retrieving data.
+- **Convex Integration**: Real-time state synchronization for active lending positions.
+- **Supabase Integration**: Permanent data storage for user accounts, profiles, and historical data.
+- **MongoDB Integration**: Efficient document-based storage for merchants, products, and protocol stats.
+
+### Main API Routes
+
+- `/api/pools`: Retrieve a list of all active lending and AMM pools.
+- `/api/positions`: Get or update user supply and borrow positions.
+- `/api/global-stats`: Retrieve network-wide television, active pools, and average APYs.
+- `/api/limits`: Get user credit limits based on their protocol activity.
+- `/api/pay`: Process and track payments across merchants.
+
+### Database Schema
+
+Fhish Core uses a distributed database architecture:
+- **MongoDB**: `pools`, `positions`, `globalStats`, `limits`, `deposits`, `transactions`, `merchants`.
+- **Supabase**: `deposits_v1`, `schema_payease`.
+
+### Key Service Libraries
+
+- `lib/mongodb.ts`: Database connection management and singleton pattern.
+- `lib/fhevm-client.ts`: Routine for FHE encryption and decryption.
+- `hooks/`: A collection of React hooks for seamless protocol interaction (`useAccount`, `useReadContract`, `useFhePrivateLendingReal`).

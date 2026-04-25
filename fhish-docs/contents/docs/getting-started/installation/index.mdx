@@ -1,0 +1,23 @@
+---
+title: Installation
+description: Setting up the Fhish SDK.
+---
+
+## SDK Installation
+
+Install the Fhish SDK via npm:
+
+```bash
+npm install @polaris-pay/sdk
+```
+
+## Setup
+
+```javascript
+import { FhishClient } from "@polaris-pay/sdk";
+
+const client = new FhishClient({
+  network: "mainnet",
+  apiKey: "YOUR_API_KEY"
+});
+```

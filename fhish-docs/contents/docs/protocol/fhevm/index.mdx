@@ -1,0 +1,44 @@
+---
+title: FHEVM Privacy Integration
+description: Real Fully Homomorphic Encryption (FHE) for confidential DeFi powered by Zama.
+---
+
+## Confidential Computing with Zama
+
+Fhish implements a production-ready **Zama FHEVM** integration. Unlike traditional zero-knowledge proofs (ZKP) which only verify private data, Zama's Fully Homomorphic Encryption (FHE) allows us to perform mathematical operations *on* encrypted data without ever decrypting it.
+
+### Why FHE for Fhish?
+
+Traditional DeFi is entirely transparent. For institucional-grade credit, this transparency is a bottleneck. Fhish uses FHE to hide:
+- **Individual Debt Levels**: Keep your financial health private.
+- **Collateral Ratios**: Prevent predatory liquidation targeting by hiding exact ratios.
+- **Credit Scoring**: Generate and utilize credit scores without exposing the underlying history.
+
+### How Zama FHEVM Works
+
+Zama's technology uses **TFHE (Threshold Fully Homomorphic Encryption)**. In our protocol:
+1.  **Encrypted Inputs**: Users encrypt their deposit or borrow amounts using the protocol's public key.
+2.  **Confidential State**: The blockchain stores these as `euint64` (encrypted 64-bit integers).
+3.  **Encrypted Logic**: The smart contracts perform operations (`FHE.add`, `FHE.sub`, `FHE.select`) on these handles.
+4.  **Threshold Decryption**: Only when specific conditions are met (e.g., user requesting their own balance via EIP-712) does the Key Management System (KMS) provide a decryption.
+
+### Our Approach: Shielded Operations
+
+We provide four primary shielded contracts on Sepolia:
+
+| Contract | Purpose | Address |
+| :--- | :--- | :--- |
+| **PrivateCollateralVault** | Confidential collateral escrow | `0x0fd2F43702c593bc2C2821A252d29CF381Bc3D95` |
+| **PrivateBorrowManager** | Encrypted debt positioning | `0xB03D9720C5b6A271F683bc112590f68Bf45e86b7` |
+| **PrivateLendingPool** | Private liquidity supply | `0xAb95180E9289Ea4f27b594E041440d0b00294991` |
+| **PrivateLiquidationEngine** | Privacy-preserving health checks | `0x8c0a086Cfc89fd81Ec0960c219F5FA33E82928A3` |
+
+### Security & Verifiability
+
+Even though data is encrypted, the protocol remains secure:
+- **ZK-Proofs for Inputs**: Every encrypted input is accompanied by a zero-knowledge proof that the user actually knows the plaintext value and it fits within protocol limits.
+- **On-Chain Enforcement**: The FHEVM ensures that if a calculation would result in an invalid state (e.g., negative balance), the transaction reverts, even if the value is encrypted.
+
+---
+
+For more technical details on Zama's library, visit [Zama Documentation](https://docs.zama.ai/fhevm).

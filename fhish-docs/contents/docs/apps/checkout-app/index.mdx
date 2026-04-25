@@ -1,0 +1,26 @@
+---
+title: Fhish Checkout App
+description: A drop-in checkout component for decentralized payments.
+---
+
+## Overview
+
+The Fhish Checkout App is a lightweight, embeddable interface for handling specific payment transactions.
+
+### Key Features
+
+- **Embeddable Modal**: Easily add Fhish to any website with just a few lines of code.
+- **Merchant-Aware UI**: Automatically adjusts the interface based on the active merchant.
+- **Transaction Proofs**: Confirms payment with on-chain proofs and off-chain database updates.
+- **Support for FHE Payments**: Encrypted transaction data for confidential payments.
+
+### Technical Details
+
+- **Protocol Integration**: Calls `MerchantRouter.sol` and `PrivateSwapBNB/USDC/USDT/WETH.sol`.
+- **Database Tracking**: Updates the `transactions` collection in MongoDB.
+- **API Support**: Uses `/api/pay` and `/api/proof` for transaction management.
+
+### Example Integration
+
+Merchants can use the checkout app by redirecting users to the checkout URL with the appropriate query parameters:
+`https://checkout.polaris.network?merchantId={ID}&amount={AMOUNT}&currency={CURRENCY}`
