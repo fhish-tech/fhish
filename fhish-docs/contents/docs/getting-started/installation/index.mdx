@@ -1,23 +1,50 @@
 ---
 title: Installation
-description: Setting up the Fhish SDK.
+description: Setting up the Fhish CLI and Development Environment.
 ---
 
-## SDK Installation
+## CLI Installation
 
-Install the Fhish SDK via npm:
+The Fhish CLI is the primary tool for managing your private FHE rollups. It is distributed as a native binary for macOS and Linux.
+
+### macOS (Silicon M1/M2/M3)
 
 ```bash
-npm install @polaris-pay/sdk
+curl -L -o fhish https://github.com/fhish-tech/fhish-cli/releases/download/v0.1.7/fhish-darwin-arm64
+chmod +x fhish
+sudo mv fhish /usr/local/bin/
 ```
 
-## Setup
+### macOS (Intel)
 
-```javascript
-import { FhishClient } from "@polaris-pay/sdk";
-
-const client = new FhishClient({
-  network: "mainnet",
-  apiKey: "YOUR_API_KEY"
-});
+```bash
+curl -L -o fhish https://github.com/fhish-tech/fhish-cli/releases/download/v0.1.7/fhish-darwin-amd64
+chmod +x fhish
+sudo mv fhish /usr/local/bin/
 ```
+
+### Linux (AMD64)
+
+```bash
+curl -L -o fhish https://github.com/fhish-tech/fhish-cli/releases/download/v0.1.7/fhish-linux-amd64
+chmod +x fhish
+sudo mv fhish /usr/local/bin/
+```
+
+## Verify Installation
+
+After installation, verify that the CLI is accessible by running:
+
+```bash
+fhish version
+```
+
+You should see `fhish version v0.1.7-alpha`.
+
+## Requirements
+
+To run a full Fhish rollup stack locally, you will also need:
+
+- **Docker & Docker Compose**: For running the containerized node and FHE services.
+- **Node.js 18+**: For interacting with the Fhish SDK and frontend demos.
+- **Metamask**: For interacting with the private EVM.

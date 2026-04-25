@@ -1,37 +1,36 @@
 ---
 title: Welcome to Fhish
-description: Yield vaults and credit rails on Ethereum.
+description: Fully Homomorphic Encryption (FHE) Rollups on Initia.
 ---
 
 ## What is Fhish?
 
-Fhish is an institutional-grade fintech layer built on the Ethereum blockchain. We bridge the gap between yield optimization and credit accessibility, providing a seamless, non-custodial experience for multichain asset holders.
+Fhish is a high-performance privacy layer built for the **Initia** network. By combining the hybrid Cosmos/EVM architecture of Initia with **Fully Homomorphic Encryption (FHE)**, Fhish enables the creation of private rollups where smart contracts can perform computations on encrypted data without ever decrypting it.
 
-At its heart, Fhish is a **yield-serviced credit protocol**. This means that when you deposit assets into our vaults, the productivity of that capital can be used to automatically repay credit lines, creating a "buy now, pay later" experience powered by your own wealth.
+At its core, Fhish provides the infrastructure to build **Privacy-First Rollups**.
 
-### The Three Layers of Fhish
+### The Fhish Stack
 
-1.  **Layer 1: Yield Vaults** - Auto-compounding strategy vaults for stablecoins and blue-chip assets.
-2.  **Layer 2: vToken Collateral** - Use your vault receipt tokens (vTokens) as collateral for instant credit lines.
-3.  **Layer 3: BNPL Credit Rails** - A unique yield-serviced repayment model where the productivity of your assets pays off your debt automatically.
+1.  **Fhish-CLI** - A native Go orchestration tool for managing your private rollup lifecycle.
+2.  **FHE-Gateway** - An independent decryption service that handles secure re-encryption and tallying of FHE results.
+3.  **FHE-Relayer** - An automated service that bridges FHE computation requests between the rollup and the gateway.
+4.  **fhish-wasm** - A core Rust library (compiled to WASM) that provides the underlying TFHE primitives.
 
-## The Fhish Value Proposition
+## Why Fhish?
 
-### 1. Capital Efficiency
-Most DeFi protocols require you to choose between earning yield or using your assets as collateral. Fhish allows you to do both simultaneously. Your collateral continues to earn yield while it secures your credit line.
+### 1. True Privacy
+Unlike Zero-Knowledge (ZK) proofs which prove the validity of a computation, FHE allows the **computation itself** to remain private. This means you can have a private voting contract where the tally is encrypted and only the final result is revealed.
 
-### 2. Privacy by Design (FHEVM)
-Using Zama's Fully Homomorphic Encryption, Fhish offers encrypted lending positions. Your total debt, collateral ratios, and credit scores can be kept private from public observation while still being verifiable on-chain for protocol safety.
+### 2. Seamless DX
+Developers can write standard Solidity contracts that interact with FHE precompiles. Our CLI handles the complex orchestration of nodes, keys, and relayers.
 
-### 3. Yield-Serviced Repayment
-Imagine a credit card where you never have to "pay" the bill manually. By routing your vault yield towards your debt interest and principal, Fhish creates a self-repaying debt model.
+### 3. Native Initia Integration
+Fhish is built specifically for Initia's **Interwoven Stack**, leveraging MiniEVM for high throughput and IBC compatibility.
 
 ---
 
 ### Getting Started
 
-- **For Shoppers:** Discover products and pay with Fhish in the [Shopping App](/docs/apps/shopping-app).
-- **For Merchants:** Set up your store and accept yield-backed payments via the [Merchant App](/docs/apps/merchant-app).
-- **For Developers:** Integrate the Fhish protocol or checkout component via the [Developer Guide](/docs/developers).
-
-Explore our documentation to learn more about how Fhish works and how to integrate it into your platform.
+- **Install the CLI:** Get the native binary and start your first rollup in the [Installation Guide](/docs/getting-started/installation).
+- **Run a Demo:** Try our private voting demonstration to see FHE in action.
+- **Architecture:** Learn how the Gateway and Relayer work together in the [Architecture Docs](/docs/architecture).
