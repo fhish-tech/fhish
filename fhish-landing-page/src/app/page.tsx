@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { Shield, Lock, Zap, Cpu, ArrowRight, Github } from 'lucide-react';
+import { Shield, Lock, Zap, Cpu, ArrowRight, Code } from 'lucide-react';
 
 export default function Home() {
   return (
@@ -10,7 +10,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <Image src="/logo.png" alt="Fhish Logo" width={32} height={32} className="w-8 h-8 object-contain" />
-            <span className="text-xl font-bold tracking-tighter uppercase italic tracking-[0.2em] text-glow">Fhish</span>
+            <span className="text-xl font-bold tracking-tighter uppercase tracking-[0.2em] text-glow font-heading">Fhish</span>
           </div>
 
           <div className="hidden md:flex items-center gap-10">
@@ -35,9 +35,9 @@ export default function Home() {
             <Shield size={14} /> The Privacy Layer for Initia
           </div>
           
-          <h1 className="text-7xl md:text-9xl font-black tracking-tighter uppercase italic mb-8 leading-[0.9]">
+          <h1 className="text-7xl md:text-9xl font-black tracking-tighter uppercase mb-8 leading-[0.9] font-heading">
             The Future is <br/>
-            <span className="text-primary text-glow italic">Encrypted</span>
+            <span className="text-primary text-glow">Encrypted</span>
           </h1>
           
           <p className="max-w-2xl text-white/40 text-lg md:text-xl font-medium leading-relaxed mb-12">
@@ -48,15 +48,15 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row gap-6">
             <Link 
               href="https://fhish-docs.vercel.app" 
-              className="px-10 py-5 bg-white text-black font-black uppercase italic tracking-wider rounded-2xl hover:bg-primary transition-all flex items-center gap-3 group"
+              className="px-10 py-5 bg-white text-black font-black uppercase tracking-wider rounded-2xl hover:bg-primary transition-all flex items-center gap-3 group"
             >
               Start Building <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
             </Link>
             <Link 
               href="https://github.com/fhish-tech" 
-              className="px-10 py-5 glass font-black uppercase italic tracking-wider rounded-2xl hover:bg-white/10 transition-all flex items-center gap-3"
+              className="px-10 py-5 glass font-black uppercase tracking-wider rounded-2xl hover:bg-white/10 transition-all flex items-center gap-3"
             >
-              <Github size={20} /> View Source
+              <Code size={20} /> View Source
             </Link>
           </div>
         </div>
@@ -88,15 +88,15 @@ export default function Home() {
         <div className="max-w-5xl mx-auto glass p-16 rounded-[3rem] text-center relative overflow-hidden group">
           <div className="absolute top-0 right-0 w-64 h-64 bg-primary/20 blur-[100px] -mr-32 -mt-32 rounded-full"></div>
           
-          <h2 className="text-4xl md:text-6xl font-black italic uppercase tracking-tighter mb-6 relative z-10">
-            Ready to <span className="text-primary italic">Fhish?</span>
+          <h2 className="text-4xl md:text-6xl font-black uppercase tracking-tighter mb-6 relative z-10 font-heading">
+            Ready to <span className="text-primary">Fhish?</span>
           </h2>
           <p className="text-white/50 text-lg mb-10 max-w-xl mx-auto relative z-10 font-medium">
             Join the privacy revolution on Initia. Explore the docs and launch your first encrypted smart contract today.
           </p>
           <Link 
             href="https://fhish-docs.vercel.app" 
-            className="inline-flex items-center gap-3 px-10 py-5 bg-primary text-black font-black uppercase italic tracking-wider rounded-2xl relative z-10 hover:scale-105 transition-transform"
+            className="inline-flex items-center gap-3 px-10 py-5 bg-primary text-black font-black uppercase tracking-wider rounded-2xl relative z-10 hover:scale-105 transition-transform"
           >
             Read the Documentation <ArrowRight size={20} />
           </Link>
@@ -126,7 +126,7 @@ function FeatureCard({ icon, title, desc }: { icon: React.ReactNode, title: stri
       <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center text-primary mb-8 group-hover:scale-110 transition-transform">
         {icon}
       </div>
-      <h3 className="text-2xl font-black italic uppercase tracking-tighter mb-4">{title}</h3>
+      <h3 className="text-2xl font-black uppercase tracking-tighter mb-4 font-heading">{title}</h3>
       <p className="text-white/40 leading-relaxed font-medium">{desc}</p>
     </div>
   );

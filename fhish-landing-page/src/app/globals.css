@@ -4,6 +4,8 @@
   --color-primary: #00D2FF;
   --color-accent: #004e92;
   --color-bg-dark: #050505;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui;
+  --font-heading: var(--font-outfit), ui-sans-serif, system-ui;
 }
 
 :root {
