@@ -33,9 +33,6 @@ export default function Dashboard() {
               <h1 className="text-4xl font-black tracking-tighter bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
                 FHISH EXPLORER
               </h1>
-              <p className="text-white/40 text-xs tracking-[0.2em] font-bold uppercase">
-                Private FHE Rollup Mainnet
-              </p>
             </div>
           </div>
           <div className="flex items-center gap-6">
