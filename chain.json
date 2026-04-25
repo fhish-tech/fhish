@@ -1,0 +1,40 @@
+{
+    "chainId": "fhish-1",
+    "features": {
+        "wasm": {
+            "enabled": false
+        },
+        "move": {
+            "enabled": false
+        },
+        "evm": {
+            "enabled": true,
+            "jsonRpc": "http://161.35.63.119:8485"
+        }
+    },
+    "fees": {
+        "fee_tokens": [
+            {
+                "average_gas_price": 0.15,
+                "denom": "umin",
+                "fixed_min_gas_price": 0.15,
+                "gas_costs": {},
+                "low_gas_price": 0.15
+            }
+        ]
+    },
+    "gas": {
+        "gasAdjustment": 1.5,
+        "maxGasLimit": 25000000
+    },
+    "logo_URIs": {},
+    "prettyName": "fhish",
+    "registry": {
+        "assets": [],
+        "bech32_prefix": "init",
+        "slip44": 118
+    },
+    "registryChainName": "fhish-1",
+    "rest": "http://161.35.63.119:1317",
+    "rpc": "http://161.35.63.119:26657"
+}

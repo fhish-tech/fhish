@@ -21,7 +21,7 @@ export const imagealt = "Fhish Documentation"
 export const twitterhandle = "@FhishTech"
 
 export const companyname = "Fhish"
-export const companylink = "https://fhish.tech"
+export const companylink = "https://fhish-tech.vercel.app"
 
 export const branding = true
 export const rightsidebar = true

@@ -1,38 +1,12 @@
 ---
-title: Protocol Architecture
-description: Comprehensive overview of the Fhish system.
+title: Architecture Overview
+description: Understanding the Fhish FHE Rollup infrastructure.
 ---
 
-## Full Stack Overview
+The Fhish architecture consists of several key components working together to enable private computation on Initia.
 
-Fhish is built with a modular architecture that integrates blockchain privacy, efficient data management, and user-friendly frontends.
+## Key Components
 
-```mermaid
-graph TD
-    User([User]) <--> Frontend[Next.js 15 Frontend]
-    Frontend <--> APILayer[Next.js API Routes]
-    APILayer <--> MongoDB[(MongoDB Atlas)]
-    APILayer <--> Blockchain[Blockchain Layer]
-    Blockchain <--> FHEVM[FHEVM Privacy Layer]
-    Blockchain <--> SmartContracts[Lending & AMM Contracts]
-```
-
-### Components
-
-1.  **Frontend Layer**: Next.js 15 (React 19) applications for shoppers, merchants, and the core protocol.
-2.  **API Layer**: Serverless functions handling data orchestration and proof verification.
-3.  **Database Layer**: MongoDB Atlas for tracking user positions, protocol stats, and merchant configurations.
-4.  **Blockchain Layer**: Ethereum-compatible network (Sepolia/Local) hosting the core protocol.
-5.  **Privacy Layer**: Zama's FHEVM for encrypted lending and borrowing operations.
-
-### Data Flow
-
-#### AMM Swap Flow
-1.  **Frontend**: User enters amount, calls `getAmountOut()`.
-2.  **Blockchain**: User approves tokens and executes `swap()`.
-3.  **UI**: Updates with new balances after transaction confirmation.
-
-#### Lending Pool Flow
-1.  **Frontend**: User deposits collateral.
-2.  **Smart Contract**: Transfers assets and mints LP tokens.
-3.  **API Route**: Updates MongoDB with the new user position.
+1. **Fhish MiniEVM Node**: A specialized Initia rollup node with FHE precompiles.
+2. **FHE Gateway**: An off-chain service that manages FHE keys and performs final decryptions.
+3. **FHE Relayer**: Bridges the gap between the on-chain FHE requests and the off-chain Gateway.

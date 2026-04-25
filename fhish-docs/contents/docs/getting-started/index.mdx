@@ -1,22 +1,48 @@
 ---
 title: Getting Started
-description: How to start using Fhish.
+description: Start your private rollup journey with Fhish.
 ---
 
-Welcome to Fhish! This guide will help you get set up with our yield vaults and credit terminal on the Ethereum ecosystem.
+Welcome to Fhish! This guide will help you set up your first private FHE rollup on the Initia ecosystem using our interactive CLI.
 
 ## Prerequisites
 
-- An Ethereum-compatible wallet (e.g., MetaMask).
-- Supported assets (USDC, ETH, etc.) for deposits on Sepolia/Mainnet.
-- Gas for transaction fees on the target chain.
+- **Docker Desktop**: Required for service orchestration.
+- **Go 1.22+**: Only if you intend to build the CLI from source.
+- **Git**: To clone configuration files.
 
-## Quick Start
+## Installation (v0.1.8)
 
-1.  **Connect Wallet:** Navigate to [app.polaris.network](https://app.polaris.network) and connect your wallet.
-2.  **Deposit Assets:** Select a vault and deposit your liquidity to start earning yield.
-3.  **Unlock Credit:** Use your vTokens as collateral to borrow USDCx instantly via the Credit Terminal.
+Download the latest Fhish CLI binary for your platform:
+
+```bash
+# macOS (Silicon)
+curl -L -o fhish https://github.com/fhish-tech/fhish-cli/releases/download/v0.1.8/fhish-darwin-arm64
+chmod +x fhish
+sudo mv fhish /usr/local/bin/
+```
+
+## Launching your Rollup
+
+The `fhish create all` command is the entry point for your private environment. It launches an interactive wizard that guides you through:
+
+1.  **Chain Setup**: Choosing your Rollup name and deriving a deterministic EVM Chain ID.
+2.  **Infrastructure**: Provisioning a MiniEVM node.
+3.  **Privacy Layer**: Setting up the FHE Gateway and generating cryptographic evaluation keys.
+4.  **Relay Services**: Configuring the Relayer for encrypted state transitions.
+
+```bash
+fhish create all
+```
+
+## Verifying the Protocol
+
+After the stack is running, you can perform an end-to-end verification to ensure the FHE co-processor is correctly decrypting transactions:
+
+```bash
+fhish docker verify
+```
 
 ---
 
-For technical integration, see our [Developer Guide](/docs/developers).
+For deeper architectural details, check the [Protocol Architecture](/docs/architecture) section.

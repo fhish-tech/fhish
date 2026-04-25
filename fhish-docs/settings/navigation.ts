@@ -6,12 +6,12 @@ export const Navigations = [
     href: `/docs${PageRoutes[0].href}`,
   },
   {
-    title: "Polaris Network",
-    href: "https://polarispay.app",
+    title: "Website",
+    href: "https://fhish-tech.vercel.app",
     external: true,
   },
 ]
 
 export const GitHubLink = {
-  href: "https://github.com/PolarisPay",
+  href: "https://github.com/fhish-tech",
 }

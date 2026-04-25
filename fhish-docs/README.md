@@ -1,23 +1,48 @@
-# 📚 Fhish Documentation
+The **Fhish Documentation** is the primary source of technical and user-facing information for the Fhish ecosystem.
 
-The **Fhish Documentation** is the primary source of technical and user-facing information for the Fhish ecosystem. It provides comprehensive guides, API references, and architectural deep-dives for developers building private applications on Initia.
+## 🏗️ System Architecture
 
-## 🚀 Key Content
-- **Introduction**: Overview of Fhish's mission to bring privacy to Initia.
-- **Protocol Architecture**: Detailed explanation of the FHE stack, Gateway, and Relayer.
-- **Developer SDK**: Technical references for the `fhish-sdk-v2`.
-- **FHE Guide**: Documentation on how to use Fully Homomorphic Encryption for private smart contracts.
-- **MiniEVM Integration**: Guides for deploying on Initia's interwoven stack.
+```mermaid
+graph TD
+    subgraph Client ["Client Side"]
+        User["User App"]
+        WASM["fhish-wasm"]
+        User -->|Encrypt| WASM
+    end
 
-## 🛠️ Tech Stack
-- **Framework**: [Next.js](https://nextjs.org/) (App Router)
-- **Styling**: Tailwind CSS
-- **Interactions**: Framer Motion
-- **Content**: MDX-based documentation
+    subgraph OnChain ["Initia MiniEVM"]
+        SC["Smart Contract"]
+        Pre["FHE Precompiles"]
+        User -->|Encrypted Tx| SC
+        SC <-->|Private Logic| Pre
+    end
+
+    subgraph Infrastructure ["FHE Stack"]
+        Relayer["FHE Relayer"]
+        Gateway["FHE Gateway"]
+        Relayer <-->|Fetch| SC
+        Relayer <-->|Decrypt| Gateway
+        Gateway -->|Result| SC
+    end
+
+    style User fill:#2563eb,stroke:#fff,color:#fff
+    style SC fill:#7c3aed,stroke:#fff,color:#fff
+    style Gateway fill:#059669,stroke:#fff,color:#fff
+    style Relayer fill:#d97706,stroke:#fff,color:#fff
+```
+
+## 🚀 Quick Start with v0.1.8
+
+The documentation site now includes the latest **v0.1.8** "Wizard Way" setup guide. 
+
+### Key CLI Workflows:
+- **`fhish create all`**: The new interactive entry point for full stack provisioning.
+- **`fhish docker verify`**: The standard way to validate FHE protocol health.
+- **`fhish version`**: Ensure you are on the latest release for the hackathon.
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Local Development
 
 ### Installation
 ```bash
@@ -36,8 +61,6 @@ Open [http://localhost:3000](http://localhost:3000) to view the documentation po
 - `contents/`: All MDX documentation files.
 - `app/`: Next.js page structure for the documentation site.
 - `components/`: UI components for the documentation interface.
-- `settings/`: Configuration for site metadata and branding.
-- `lib/`: Logic for parsing MDX and generating sidebars.
 
 ## 🌍 Contributing
-To update the documentation, modify the markdown files in the `contents/` directory. All changes should follow the standard technical documentation style guide.
+To update the documentation, modify the markdown files in the `contents/` directory.

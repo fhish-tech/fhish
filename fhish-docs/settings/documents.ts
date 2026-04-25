@@ -6,24 +6,20 @@ export const Documents: Paths[] = [
     href: "",
   },
   {
-    title: "Protocol Architecture",
+    title: "Architecture",
     href: "/architecture",
-  },
-  {
-    title: "Protocol Core",
-    href: "/protocol",
     items: [
       {
-        title: "Smart Contracts",
-        href: "/smart-contracts",
+        title: "The FHE Gateway",
+        href: "/gateway",
       },
       {
-        title: "FHEVM Privacy",
-        href: "/fhevm",
+        title: "The FHE Relayer",
+        href: "/relayer",
       },
       {
-        title: "AMM Pools & Yield",
-        href: "/amm-pools",
+        title: "FHE Precompiles",
+        href: "/precompiles",
       },
     ],
   },
@@ -32,29 +28,16 @@ export const Documents: Paths[] = [
     href: "/core",
     items: [
       {
-        title: "Overview",
-        href: "/overview",
-      },
-    ],
-  },
-  {
-    spacer: true,
-  },
-  {
-    title: "Applications",
-    href: "/apps",
-    items: [
-      {
-        title: "Merchant App",
-        href: "/merchant-app",
+        title: "FHE Protocol",
+        href: "/protocol",
       },
       {
-        title: "Shopping App",
-        href: "/shopping-app",
+        title: "MiniEVM Integration",
+        href: "/minievm",
       },
       {
-        title: "Checkout App",
-        href: "/checkout-app",
+        title: "WASM Engine",
+        href: "/wasm",
       },
     ],
   },
@@ -66,8 +49,12 @@ export const Documents: Paths[] = [
     href: "/getting-started",
     items: [
       {
-        title: "Installation",
+        title: "CLI Installation",
         href: "/installation",
+      },
+      {
+        title: "Quickstart Guide",
+        href: "/quickstart",
       },
     ],
   },
@@ -75,7 +62,17 @@ export const Documents: Paths[] = [
     spacer: true,
   },
   {
-    title: "Developer Guide",
+    title: "Developer Guides",
     href: "/developers",
+    items: [
+      {
+        title: "Writing FHE Contracts",
+        href: "/writing-contracts",
+      },
+      {
+        title: "CLI Reference",
+        href: "/cli-reference",
+      },
+    ],
   },
 ]
