@@ -3,11 +3,11 @@
 import { useEffect, useState } from "react"
 import { useParams } from "next/navigation"
 import { ethers } from "ethers"
-import { getProvider } from "@/lib/ethers"
+import { getProvider, decodeInput } from "@/lib/ethers"
 import Link from "next/link"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { ArrowLeft, Box, Hash, User, ArrowRight, Zap, Database } from "lucide-react"
+import { ArrowLeft, Box, Hash, User, ArrowRight, Zap, Database, Terminal, List, Shield, Code } from "lucide-react"
 
 export default function TransactionPage() {
   const { hash } = useParams()
@@ -55,103 +55,154 @@ export default function TransactionPage() {
     )
   }
 
-  const isFHE = tx.data.length > 100 // Simple heuristic for encrypted payloads
+  const decoded = decodeInput(tx.data)
+  const isFHE = tx.data.length > 50
 
   return (
-    <div className="min-h-screen bg-[#050505] text-white p-6 font-sans">
-      <div className="max-w-5xl mx-auto">
+    <div className="min-h-screen bg-[#050505] text-white p-6 font-sans selection:bg-blue-500/30">
+      <div className="max-w-6xl mx-auto">
+        {/* Header */}
         <div className="flex items-center justify-between mb-8">
-          <div className="flex items-center gap-4">
-            <Link href="/" className="p-2 hover:bg-white/10 rounded-full transition-colors">
-              <ArrowLeft size={24} />
+          <div className="flex items-center gap-6">
+            <Link href="/" className="p-3 bg-white/5 hover:bg-white/10 rounded-2xl transition-all border border-white/5 group">
+              <ArrowLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
             </Link>
-            <h1 className="text-3xl font-bold tracking-tight bg-gradient-to-r from-blue-400 to-purple-500 bg-clip-text text-transparent">
-              Transaction Details
-            </h1>
+            <div>
+              <div className="text-[10px] text-blue-400 font-bold uppercase tracking-[0.2em] mb-1">Transaction Ledger</div>
+              <h1 className="text-4xl font-black tracking-tighter">
+                Details
+              </h1>
+            </div>
           </div>
           {isFHE && (
-            <Badge className="bg-purple-500/20 text-purple-400 border-purple-500/30 px-3 py-1 text-sm font-semibold animate-pulse">
-              FHE ENCRYPTED
-            </Badge>
+            <div className="flex items-center gap-2 px-4 py-2 bg-purple-500/10 border border-purple-500/30 rounded-xl">
+              <Shield size={16} className="text-purple-400 animate-pulse" />
+              <span className="text-xs font-black text-purple-400 uppercase tracking-widest">FHE Shielded</span>
+            </div>
           )}
         </div>
 
         <div className="grid gap-6">
-          {/* Main Stats */}
+          {/* Quick Info Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <Card className="bg-[#0a0a0a] border-white/5">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-xs uppercase tracking-widest text-white/40 flex items-center gap-2">
-                  <Hash size={14} /> Status
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <Badge className={receipt?.status === 1 ? "bg-green-500/10 text-green-500 border-green-500/20" : "bg-red-500/10 text-red-500 border-red-500/20"}>
-                  {receipt?.status === 1 ? "Success" : "Failed"}
-                </Badge>
-              </CardContent>
-            </Card>
-            <Card className="bg-[#0a0a0a] border-white/5">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-xs uppercase tracking-widest text-white/40 flex items-center gap-2">
-                  <Box size={14} /> Block
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-xl font-mono text-blue-400">#{tx.blockNumber}</div>
-              </CardContent>
-            </Card>
-            <Card className="bg-[#0a0a0a] border-white/5">
-              <CardHeader className="pb-2">
-                <CardTitle className="text-xs uppercase tracking-widest text-white/40 flex items-center gap-2">
-                  <Zap size={14} /> Gas Used
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="text-xl font-mono">{receipt?.gasUsed.toString() ?? "0"}</div>
-              </CardContent>
-            </Card>
+            <DetailCard icon={<Hash size={18} />} title="Status" value={receipt?.status === 1 ? "Success" : "Failed"} color={receipt?.status === 1 ? "text-green-400" : "text-red-400"} />
+            <DetailCard icon={<Box size={18} />} title="Block Height" value={`#${tx.blockNumber}`} color="text-blue-400" />
+            <DetailCard icon={<Zap size={18} />} title="Gas Consumption" value={receipt?.gasUsed.toString() ?? "0"} color="text-yellow-400" />
           </div>
 
-          {/* Details Table */}
-          <Card className="bg-[#0a0a0a] border-white/5">
+          {/* Primary Data Card */}
+          <Card className="bg-[#0a0a0a] border-white/5 overflow-hidden">
             <CardContent className="p-0">
               <div className="divide-y divide-white/5">
-                <div className="grid grid-cols-1 md:grid-cols-4 p-4 items-center">
-                  <div className="text-white/40 text-sm flex items-center gap-2"><Hash size={14} /> Transaction Hash</div>
-                  <div className="md:col-span-3 font-mono text-sm break-all">{tx.hash}</div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-4 p-4 items-center">
-                  <div className="text-white/40 text-sm flex items-center gap-2"><User size={14} /> From</div>
-                  <div className="md:col-span-3 font-mono text-sm break-all text-blue-400">{tx.from}</div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-4 p-4 items-center">
-                  <div className="text-white/40 text-sm flex items-center gap-2"><ArrowRight size={14} /> To</div>
-                  <div className="md:col-span-3 font-mono text-sm break-all text-blue-400">{tx.to || "Contract Creation"}</div>
-                </div>
-                <div className="grid grid-cols-1 md:grid-cols-4 p-4 items-center">
-                  <div className="text-white/40 text-sm flex items-center gap-2"><Database size={14} /> Value</div>
-                  <div className="md:col-span-3 font-mono">{ethers.formatEther(tx.value)} INIT</div>
-                </div>
+                <DataRow label="Transaction Hash" value={tx.hash} />
+                <DataRow label="From (Origin)" value={tx.from} isAddress />
+                <DataRow label="To (Destination)" value={tx.to || "Contract Creation"} isAddress />
+                <DataRow label="Value" value={`${ethers.formatEther(tx.value)} INIT`} />
               </div>
             </CardContent>
           </Card>
 
-          {/* Input Data */}
-          <Card className="bg-[#0a0a0a] border-white/5">
-            <CardHeader>
-              <CardTitle className="text-sm font-semibold flex items-center gap-2">
-                <Database size={16} className="text-purple-400" /> Input Data
-              </CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="bg-black/40 p-4 rounded-lg font-mono text-xs break-all max-h-64 overflow-y-auto text-white/60">
+          {/* Shielded Execution Section */}
+          {decoded && (
+             <section>
+                <div className="flex items-center gap-2 mb-4">
+                    <Shield size={16} className="text-purple-400" />
+                    <h2 className="text-sm font-black uppercase tracking-widest text-purple-400">Shielded Instruction</h2>
+                </div>
+                <Card className="bg-[#0a0a0a] border-purple-500/30 overflow-hidden">
+                    <CardHeader className="bg-purple-500/5 py-4 border-b border-purple-500/10">
+                        <div className="flex items-center justify-between">
+                            <span className="text-xs font-mono text-purple-300">Selector: {tx.data.slice(0, 10)}</span>
+                            <span className="text-[10px] bg-purple-500/20 text-purple-300 px-2 py-0.5 rounded font-bold uppercase">Encrypted Call</span>
+                        </div>
+                    </CardHeader>
+                    <CardContent className="p-0">
+                        <div className="divide-y divide-white/5">
+                            {Object.entries(decoded.args).map(([key, value], idx) => (
+                                <div key={key} className="grid grid-cols-1 md:grid-cols-4 p-5">
+                                    <div className="text-white/40 text-[10px] font-black uppercase tracking-widest pt-1">Segment {idx}</div>
+                                    <div className="md:col-span-3 font-mono text-xs break-all text-purple-400 leading-relaxed bg-purple-500/5 p-3 rounded-lg border border-purple-500/10">
+                                        {String(value)}
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </CardContent>
+                </Card>
+             </section>
+          )}
+
+          {/* Emission Logs Section */}
+          {receipt && receipt.logs.length > 0 && (
+            <section>
+                <div className="flex items-center gap-2 mb-4">
+                    <List size={16} className="text-blue-400" />
+                    <h2 className="text-sm font-black uppercase tracking-widest text-blue-400">Emission Logs</h2>
+                </div>
+                <div className="space-y-4">
+                    {receipt.logs.map((log, i) => (
+                        <Card key={i} className="bg-[#0a0a0a] border-white/5 overflow-hidden">
+                            <div className="bg-white/5 px-5 py-3 flex items-center justify-between border-b border-white/5">
+                                <span className="text-[10px] font-black uppercase tracking-widest text-white/40">Log Event #{i}</span>
+                                <span className="text-[10px] font-mono text-white/20">{log.address}</span>
+                            </div>
+                            <div className="p-5">
+                                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                                    <div className="text-[10px] font-bold text-white/30 uppercase">Data Payload</div>
+                                    <div className="md:col-span-3 font-mono text-xs break-all text-blue-300 bg-blue-500/5 p-4 rounded-xl border border-blue-500/10 leading-relaxed">
+                                        {log.data}
+                                    </div>
+                                </div>
+                            </div>
+                        </Card>
+                    ))}
+                </div>
+            </section>
+          )}
+
+          {/* Ciphertext Section */}
+          <section>
+            <div className="flex items-center gap-2 mb-4">
+                <Terminal size={16} className="text-gray-500" />
+                <h2 className="text-sm font-black uppercase tracking-widest text-gray-500">Full Ciphertext</h2>
+            </div>
+            <div className="bg-[#0a0a0a] border border-white/5 p-6 rounded-2xl font-mono text-[11px] break-all text-gray-300 leading-loose">
                 {tx.data}
-              </div>
-            </CardContent>
-          </Card>
+            </div>
+          </section>
         </div>
+      </div>
+      <div className="h-24" />
+    </div>
+  )
+}
+
+function DetailCard({ icon, title, value, color }: { icon: any, title: string, value: string, color: string }) {
+  return (
+    <Card className="bg-[#0a0a0a] border-white/5 p-6 rounded-2xl hover:bg-white/[0.02] transition-colors">
+      <div className="flex items-center gap-3 mb-4 text-white/40">
+        {icon}
+        <span className="text-[10px] font-black uppercase tracking-widest">{title}</span>
+      </div>
+      <div className={cn("text-2xl font-black tracking-tighter", color)}>{value}</div>
+    </Card>
+  )
+}
+
+function DataRow({ label, value, isAddress }: { label: string, value: string, isAddress?: boolean }) {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-4 p-5 items-center hover:bg-white/[0.01] transition-colors">
+      <div className="text-white/40 text-[10px] font-black uppercase tracking-widest">{label}</div>
+      <div className={cn(
+        "md:col-span-3 font-mono text-sm break-all",
+        isAddress ? "text-blue-400" : "text-white"
+      )}>
+        {value}
       </div>
     </div>
   )
+}
+
+function cn(...classes: any[]) {
+  return classes.filter(Boolean).join(" ");
 }

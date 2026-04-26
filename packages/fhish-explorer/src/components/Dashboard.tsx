@@ -2,12 +2,13 @@
 
 import { useBlockScanner, Transaction, Block } from "@/hooks/useBlockScanner"
 import { formatAddress, formatHash, cn } from "@/lib/utils"
-import { Activity, Box, Database, Shield, Zap, Search, ChevronRight } from "lucide-react"
+import { decodeInput } from "@/lib/ethers"
+import { Activity, Box, Database, Shield, Zap, Search, ChevronRight, Terminal } from "lucide-react"
 import { motion } from "framer-motion"
 import Link from "next/link"
 
 export default function Dashboard() {
-  const { latestBlock, blocks, transactions, loading } = useBlockScanner()
+  const { latestBlock, blocks, transactions, loading, refreshing, refresh } = useBlockScanner()
 
   if (loading) {
     return (
@@ -36,6 +37,16 @@ export default function Dashboard() {
             </div>
           </div>
           <div className="flex items-center gap-6">
+            <button 
+              onClick={() => refresh()}
+              disabled={refreshing}
+              className="flex items-center gap-2 bg-white/5 hover:bg-white/10 px-4 py-2 rounded-xl border border-white/10 transition-all active:scale-95 disabled:opacity-50"
+            >
+              <Activity size={16} className={cn(refreshing && "animate-spin text-blue-400")} />
+              <span className="text-sm font-bold uppercase tracking-tight">
+                {refreshing ? "Refreshing..." : "Refresh"}
+              </span>
+            </button>
             <div className="text-right">
               <div className="text-[10px] text-white/40 font-bold uppercase tracking-widest mb-1">Network Status</div>
               <div className="flex items-center gap-2 text-green-400 font-mono text-sm">
@@ -142,7 +153,7 @@ function TransactionItem({ tx }: { tx: Transaction }) {
               {formatHash(tx.hash)}
               {tx.isFHE && (
                 <span className="bg-purple-500/10 text-purple-400 text-[10px] px-1.5 py-0.5 rounded border border-purple-500/20 uppercase tracking-wider font-bold">
-                  FHE Call
+                  Shielded Call: {tx.data.slice(0, 10)}
                 </span>
               )}
             </div>

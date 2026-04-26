@@ -22,64 +22,64 @@ export interface Block {
 }
 
 export function useBlockScanner() {
+  const [refreshing, setRefreshing] = useState(false)
   const [latestBlock, setLatestBlock] = useState<number>(0)
   const [blocks, setBlocks] = useState<Block[]>([])
   const [transactions, setTransactions] = useState<Transaction[]>([])
   const [loading, setLoading] = useState(true)
 
+  const scan = async () => {
+    const provider = getProvider()
+    setRefreshing(true)
+    try {
+      const blockNumber = await provider.getBlockNumber()
+      setLatestBlock(blockNumber)
+
+      const blockPromises = []
+      const SCAN_DEPTH = 100 // Increased depth
+      for (let i = 0; i < SCAN_DEPTH; i++) {
+        if (blockNumber - i < 0) break
+        blockPromises.push(provider.getBlock(blockNumber - i, true))
+      }
+
+      const fetchedBlocks = await Promise.all(blockPromises)
+      const validBlocks = fetchedBlocks.filter(b => b !== null) as ethers.Block[]
+
+      setBlocks(validBlocks.map(b => ({
+        number: b.number,
+        hash: b.hash!,
+        timestamp: b.timestamp,
+        transactions: b.transactions as string[]
+      })))
+
+      const allTxs: Transaction[] = []
+      for (const b of validBlocks) {
+        const txs = b.prefetchedTransactions
+        txs.forEach(tx => {
+          allTxs.push({
+            hash: tx.hash,
+            from: tx.from,
+            to: tx.to,
+            value: ethers.formatEther(tx.value),
+            blockNumber: tx.blockNumber!,
+            timestamp: b.timestamp,
+            isFHE: tx.data.length > 50 // More sensitive detection
+          })
+        })
+      }
+      setTransactions(allTxs.sort((a, b) => b.timestamp - a.timestamp))
+      setLoading(false)
+    } catch (err) {
+      console.error("Scanner failed:", err)
+    } finally {
+      setRefreshing(false)
+    }
+  }
+
   useEffect(() => {
+    scan()
     const provider = getProvider()
 
-    async function init() {
-      try {
-        const blockNumber = await provider.getBlockNumber()
-        setLatestBlock(blockNumber)
-
-        // Fetch last 50 blocks for deeper history
-        const blockPromises = []
-        const SCAN_DEPTH = 50
-        for (let i = 0; i < SCAN_DEPTH; i++) {
-          if (blockNumber - i < 0) break
-          blockPromises.push(provider.getBlock(blockNumber - i, true))
-        }
-
-        const fetchedBlocks = await Promise.all(blockPromises)
-        const validBlocks = fetchedBlocks.filter(b => b !== null) as ethers.Block[]
-
-        setBlocks(validBlocks.map(b => ({
-          number: b.number,
-          hash: b.hash!,
-          timestamp: b.timestamp,
-          transactions: b.transactions as string[]
-        })))
-
-        // Extract transactions from all scanned blocks
-        const allTxs: Transaction[] = []
-        for (const b of validBlocks) {
-          const txs = b.prefetchedTransactions
-          txs.forEach(tx => {
-            allTxs.push({
-              hash: tx.hash,
-              from: tx.from,
-              to: tx.to,
-              value: ethers.formatEther(tx.value),
-              blockNumber: tx.blockNumber!,
-              timestamp: b.timestamp,
-              isFHE: tx.data.length > 100 // Updated heuristic
-            })
-          })
-        }
-        // No longer capping at 20 - show the whole history
-        setTransactions(allTxs.sort((a, b) => b.timestamp - a.timestamp))
-        setLoading(false)
-      } catch (err) {
-        console.error("Scanner init failed:", err)
-      }
-    }
-
-    init()
-
-    // Listen for new blocks
     const onBlock = async (num: number) => {
       setLatestBlock(num)
       const block = await provider.getBlock(num, true)
@@ -99,7 +99,7 @@ export function useBlockScanner() {
         value: ethers.formatEther(tx.value),
         blockNumber: tx.blockNumber!,
         timestamp: block.timestamp,
-        isFHE: tx.data.length > 100
+        isFHE: tx.data.length > 50
       }))
 
       setTransactions(prev => [...newTxs, ...prev])
@@ -111,5 +111,5 @@ export function useBlockScanner() {
     }
   }, [])
 
-  return { latestBlock, blocks, transactions, loading }
+  return { latestBlock, blocks, transactions, loading, refreshing, refresh: scan }
 }
